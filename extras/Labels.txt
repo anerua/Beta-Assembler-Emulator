@@ -1,0 +1,8 @@
+		ADDC(R31,1,R2)
+		BEQ(R31,check,R31)
+loop:	ADD(R1,R2,R1)
+		ADDC(R2,1,R2)
+check: 	CMPLEC(R2,30,R0)
+		BT(R0,loop,R31)
+		ST(R1,0,R31)
+		LD(R31,0,R4)

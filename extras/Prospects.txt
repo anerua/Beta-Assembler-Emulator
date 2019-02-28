@@ -1,0 +1,6 @@
+- Hard code R31 to zero
+- recognize string label
+- machine code generation
+- support macros
+- PUSH, POP, ALLLOCATE, DEALLOCATE support
+- support multiple files

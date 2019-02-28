@@ -1,0 +1,33 @@
+This package should contain only files that would help format raw source code
+to the standard Beta format
+
+# Consider merging this package with the assembler package
+
+PROCEDURE:
+
+- Take raw Beta source code from a file or the editor (best if it is taken from a
+  file to avoid ambiguity)
+
+- Convert it to standard Beta format:
+    - Strip any irrelevant whitespace from each line and overall 
+    - First check for all defined macros and hash them all in a MACRO HASH TABLE
+    - Convert all macros to their equivalent Beta code
+    - Store each line as a virtual address (Note: Lines beginning with .= are not stored in separate addresses)
+    - Hash all keywords of the Beta Assembler (This is a predefined OP HASH TABLE)
+    - Split each line of code to its OPCODE, ARGUMENTS and possibly its LABEL
+    - If OPCODE matches any key in hash table, proceed compilation
+        - If OPCODE has no match in OP HASH TABLE, look up in MACRO HASH TABLE
+        - If OPCODE has a match in MACRO HASH TABLE:
+            //read about how to compile macros and functions
+        - If OPCODE has no match, throw a SYNTAX ERROR
+    - Check number of ARGUMENTS with that required by the OPCODE:
+        - If they match, proceed
+        - If they don't, throw an ARGUMENT NUMBER ERROR
+        (Note: Some OPCODE can work with fewer arguments, if so, add the auto arguments to ARGUMENTS)
+    - Check if format of ARGUMENTS match that required by OPCODE:
+        - If they match, proceed
+        - If they don't, throw an ARGUMENT MISMATCH ERROR
+    - If line has a LABEL, compute the NEW LABEL with respect to the newly assembled code
+    (Note: The whole process may have to be done repeatedly to achieve desired result
+
+- Store standardized code in memory file
